@@ -11,24 +11,24 @@ browser.get('https://enquiry.indianrail.gov.in/mntes/')
 
 import csv
 
-f = open('names15.csv', 'w')
+f = open('names17.csv', 'w')
 
 
 fnames = ['trainNo', 'trainStatus']
 writer = csv.DictWriter(f, fieldnames=fnames)  
 writer.writeheader()
-l=['12801','12802','12003','12451','12452','12033','12034','12011','12005','12045','12015','12014']
+l=['22691','22692']
 for i in l:
 	browser.implicitly_wait(10)
 	elem=browser.find_element_by_name('trainNo').send_keys(i,Keys.RETURN)
 	browser.maximize_window() 
-	browser.implicitly_wait(10)
+	
 
 	select=Select(browser.find_element_by_name('jStation'))
 	index=(len(select.options))-1
 	
 	select.select_by_index(index)
-	days=['jYesterday','jToday']
+	days=['jYesterday']
 	for day in days:
 		try:
 			x = WebDriverWait(browser, 10).until(EC.element_to_be_clickable(('name',day)))
@@ -39,7 +39,7 @@ for i in l:
 			
 			x = WebDriverWait(browser, 10).until(EC.element_to_be_clickable(('name',day)))
 			x.click()
-			browser.implicitly_wait(10)
+			
 		try:
    	    	   nodelay=browser.find_element_by_class_name('greenS11L')
    	    	   status=nodelay.text
