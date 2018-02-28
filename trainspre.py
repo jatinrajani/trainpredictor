@@ -5,19 +5,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+
+
 browser=webdriver.Firefox() 
 browser.get('https://enquiry.indianrail.gov.in/mntes/')
 
 
 import csv
 
-f = open('day7.csv', 'w')
+f = open('day7(0).csv', 'w')
 
 
 fnames = ['trainNo', 'trainStatus']
 writer = csv.DictWriter(f, fieldnames=fnames)  
 writer.writeheader()
-l=['12801','12802','12003','12451','12452','12033','12034','12011','12005','12045','12015','12014']
+l=['12004','14095','14645','12011','12445','18101','12002','12954','12402','12554','12958','14659','12461']
 for i in l:
 	browser.implicitly_wait(10)
 	elem=browser.find_element_by_name('trainNo').send_keys(i,Keys.RETURN)
@@ -28,16 +30,15 @@ for i in l:
 	index=(len(select.options))-1
 	
 	select.select_by_index(index)
-	days=['jYesterday','jToday']
+	days=['jYesterday']
 	for day in days:
 		try:
-			x = WebDriverWait(browser, 10).until(EC.element_to_be_clickable(('name',day)))
+			x = WebDriverWait(browser, 20).until(EC.element_to_be_clickable(('name',day)))
 			x.click()
 			
+		
 		except TimeOutException:
 		       break
-			
-		
 		try:
    	    	   nodelay=browser.find_element_by_class_name('greenS11L')
    	    	   status=nodelay.text
