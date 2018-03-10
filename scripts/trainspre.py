@@ -13,7 +13,7 @@ browser.get('https://enquiry.indianrail.gov.in/mntes/')
 
 import csv
 
-f = open('day1(1).csv', 'w')
+f = open('day7(1).csv', 'w')
 
 
 fnames = ['trainNo', 'trainStatus']
